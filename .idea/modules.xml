@@ -4,6 +4,14 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CaloryTracker.iml" filepath="$PROJECT_DIR$/.idea/modules/CaloryTracker.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CaloryTracker.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CaloryTracker.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/CaloryTracker.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/CaloryTracker.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/onboarding/CaloryTracker.onboarding.iml" filepath="$PROJECT_DIR$/.idea/modules/onboarding/CaloryTracker.onboarding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/onboarding/onboarding_domain/CaloryTracker.onboarding.onboarding_domain.iml" filepath="$PROJECT_DIR$/.idea/modules/onboarding/onboarding_domain/CaloryTracker.onboarding.onboarding_domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/onboarding/onboarding_presentation/CaloryTracker.onboarding.onboarding_presentation.iml" filepath="$PROJECT_DIR$/.idea/modules/onboarding/onboarding_presentation/CaloryTracker.onboarding.onboarding_presentation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tracker/CaloryTracker.tracker.iml" filepath="$PROJECT_DIR$/.idea/modules/tracker/CaloryTracker.tracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tracker/tracker_data/CaloryTracker.tracker.tracker_data.iml" filepath="$PROJECT_DIR$/.idea/modules/tracker/tracker_data/CaloryTracker.tracker.tracker_data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tracker/tracker_domain/CaloryTracker.tracker.tracker_domain.iml" filepath="$PROJECT_DIR$/.idea/modules/tracker/tracker_domain/CaloryTracker.tracker.tracker_domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tracker/tracker_presentation/CaloryTracker.tracker.tracker_presentation.iml" filepath="$PROJECT_DIR$/.idea/modules/tracker/tracker_presentation/CaloryTracker.tracker.tracker_presentation.iml" />
     </modules>
   </component>
 </project>
