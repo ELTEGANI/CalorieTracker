@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/CaloryTracker.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/CaloryTracker.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CaloryTracker.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/CaloryTracker.buildSrc.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/CaloryTracker.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/CaloryTracker.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-ui/CaloryTracker.core-ui.iml" filepath="$PROJECT_DIR$/.idea/modules/core-ui/CaloryTracker.core-ui.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/onboarding/CaloryTracker.onboarding.iml" filepath="$PROJECT_DIR$/.idea/modules/onboarding/CaloryTracker.onboarding.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/onboarding/onboarding_domain/CaloryTracker.onboarding.onboarding_domain.iml" filepath="$PROJECT_DIR$/.idea/modules/onboarding/onboarding_domain/CaloryTracker.onboarding.onboarding_domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/onboarding/onboarding_presentation/CaloryTracker.onboarding.onboarding_presentation.iml" filepath="$PROJECT_DIR$/.idea/modules/onboarding/onboarding_presentation/CaloryTracker.onboarding.onboarding_presentation.iml" />
