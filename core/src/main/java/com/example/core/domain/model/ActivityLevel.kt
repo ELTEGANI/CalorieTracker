@@ -1,6 +1,6 @@
 package com.example.core.domain.model
 
-sealed class ActivityLevel(name:String){
+sealed class ActivityLevel(var name:String){
     object Low:ActivityLevel("low")
     object Medium:ActivityLevel("medium")
     object High:ActivityLevel("high")

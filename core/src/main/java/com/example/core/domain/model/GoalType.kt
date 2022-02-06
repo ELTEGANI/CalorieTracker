@@ -1,6 +1,6 @@
 package com.example.core.domain.model
 
-sealed class GoalType(name:String){
+sealed class GoalType(var name:String){
     object LoseWeight:GoalType("lose_weight")
     object KeepWeight:GoalType("keep_weight")
     object GainWeight:GoalType("gain_weight")
