@@ -68,7 +68,25 @@ class DefaultPreferences(
 
     override fun loadUserInfo(): UserInfo {
         val age =sharedPreferences.getInt(Preferences.KEY_AGE,-1)
-
+        val height =sharedPreferences.getInt(Preferences.KEY_HEIGHT,-1)
+        val weight =sharedPreferences.getFloat(Preferences.KEY_WEGIHT,-1f)
+        val genderString =sharedPreferences.getString(Preferences.KEY_GENDER,null)
+        val activityLevelString =sharedPreferences.getString(Preferences.KEY_ACTIVITY_LEVEL,null)
+        val goalType =sharedPreferences.getString(Preferences.KEY_GOAL_TYPE,null)
+        val carbRatio =sharedPreferences.getFloat(Preferences.KEY_CARB_RATIO,-1f)
+        val proteinRatio =sharedPreferences.getFloat(Preferences.KEY_PROTEIN_RATIO,-1f)
+        val fatRatio =sharedPreferences.getFloat(Preferences.KEY_FAT_RATIO,-1f)
+        return UserInfo(
+            gender = Gender.fromString(genderString?:"male"),
+            age = age,
+            weight = weight,
+            height = height,
+            activityLevel = ActivityLevel.fromString(activityLevelString?: "medium"),
+            goalType = GoalType.fromString(goalType?:"keep_weight"),
+            carbRatio = carbRatio,
+            proteinRatio = proteinRatio,
+            fatRatio = fatRatio,
+        )
     }
 
 }
