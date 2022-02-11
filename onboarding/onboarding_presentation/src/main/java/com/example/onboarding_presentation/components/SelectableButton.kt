@@ -48,7 +48,6 @@ fun SelectableButton(
        Text(
            text = text,
            style = textStyle,
-           color = if(isSelected) selectedTextColor else color,
-       )
+           color = if(isSelected) selectedTextColor else color)
    }
 }
