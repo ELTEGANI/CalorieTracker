@@ -1,6 +1,5 @@
 package com.example.tracker_presentation.tracker_overview.components
 
-import android.widget.ImageButton
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Icon
@@ -15,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.tracker_presentation.R
-import com.example.tracker_presentation.tracker_overview.TrackerOverViewEvent
 import java.time.LocalDate
 
 
@@ -23,7 +21,7 @@ import java.time.LocalDate
 fun DaySelector(
     localDate: LocalDate,
     onPreviousDayClick:()-> Unit,
-    OnNextDayClick:()->Unit,
+    onNextDayClick:()->Unit,
     modifier: Modifier = Modifier
 ){
    Row(
@@ -37,10 +35,10 @@ fun DaySelector(
           )
       }
        Text(
-           text = ParseDateText(date = localDate),
+           text = parseDateText(date = localDate),
            style = MaterialTheme.typography.h2
        )
-       IconButton(onClick =OnNextDayClick){
+       IconButton(onClick = onNextDayClick){
            Icon(imageVector = Icons.Default.ArrowForward,
                contentDescription = stringResource(id = R.string.next_day)
            )
