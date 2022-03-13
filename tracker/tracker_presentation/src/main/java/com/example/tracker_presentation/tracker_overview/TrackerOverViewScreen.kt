@@ -32,7 +32,7 @@ fun TrackerOverViewScreen(
               onPreviousDayClick = {
                 viewModel.onEvent(TrackerOverViewEvent.OnPreviousDayClick)
               },
-              OnNextDayClick = {
+              onNextDayClick = {
                viewModel.onEvent(TrackerOverViewEvent.OnNextDayClick)
               },
               modifier = Modifier
