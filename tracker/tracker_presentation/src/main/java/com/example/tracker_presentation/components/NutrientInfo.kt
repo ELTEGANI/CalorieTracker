@@ -18,6 +18,7 @@ import com.example.core_ui.LocalSpacing
 
 @Composable
 fun NutrientInfo(
+    name:String,
     amount:Int,
     unit:String,
     modifier: Modifier = Modifier,
