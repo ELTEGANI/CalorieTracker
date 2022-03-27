@@ -11,6 +11,7 @@ import com.example.core_ui.LocalSpacing
 import com.example.tracker_presentation.R
 import com.example.tracker_presentation.tracker_overview.components.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
 
 
@@ -22,6 +23,14 @@ fun TrackerOverViewScreen(
   val spacing = LocalSpacing.current
   val state = viewModel.state
   val context = LocalContext.current
+  LaunchedEffect(key1 = context){
+      viewModel.uiEvent.collect{event->
+          when(event){
+              is UiEvent.Navigate -> onNavigate(event)
+              else -> Unit
+          }
+      }
+  }
   LazyColumn(
       modifier = Modifier
           .fillMaxSize()
