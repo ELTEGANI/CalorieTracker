@@ -17,18 +17,22 @@ class TrackFood(
     mealType: MealType,
     localDate: LocalDate
     ){
-      trackerRepository.insertTrackedFood(
-          TrackedFood(
-              name = trackableFood.name,
-              carbs = ((trackableFood.carbsPer100g / 100f) * amount).roundToInt(),
-              protien = ((trackableFood.proteinPer100g / 100f) * amount).roundToInt(),
-              fat = ((trackableFood.fatPer100g / 100f) * amount).roundToInt(),
-              calories = ((trackableFood.caloriesPer100g / 100f) * amount).roundToInt(),
-              imageUrl = trackableFood.imageUrl,
-              mealType = mealType,
-              amount = amount,
-              date = localDate
-          )
-      )
+        trackableFood.imageUrl?.let {
+            TrackedFood(
+                name = trackableFood.name,
+                carbs = ((trackableFood.carbsPer100g / 100f) * amount).roundToInt(),
+                protein = ((trackableFood.proteinPer100g / 100f) * amount).roundToInt(),
+                fat = ((trackableFood.fatPer100g / 100f) * amount).roundToInt(),
+                calories = ((trackableFood.caloriesPer100g / 100f) * amount).roundToInt(),
+                imageUrl = it,
+                mealType = mealType,
+                amount = amount,
+                date = localDate
+            )
+        }?.let {
+            trackerRepository.insertTrackedFood(
+                it
+            )
+        }
     }
 }

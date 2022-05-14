@@ -18,7 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 @Composable
 fun TrackerOverViewScreen(
     onNavigate:(UiEvent.Navigate)->Unit,
-    viewModel:TrackerOverViewModel = hiltViewModel()
+    viewModel:TrackerOverviewViewModel = hiltViewModel()
 ){
   val spacing = LocalSpacing.current
   val state = viewModel.state

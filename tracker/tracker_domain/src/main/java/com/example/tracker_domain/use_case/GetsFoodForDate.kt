@@ -9,10 +9,11 @@ import java.time.LocalDate
 import kotlin.math.roundToInt
 
 
-class GetsFoodForDate(
-    private val trackerRepository: TrackerRepository
+class GetFoodsForDate(
+    private val repository: TrackerRepository
 ) {
-     operator fun invoke(localDate:LocalDate):Flow<List<TrackedFood>>{
-      return trackerRepository.getFoodsForDate(localDate)
+
+    operator fun invoke(date: LocalDate): Flow<List<TrackedFood>> {
+        return repository.getFoodsForDate(date)
     }
 }

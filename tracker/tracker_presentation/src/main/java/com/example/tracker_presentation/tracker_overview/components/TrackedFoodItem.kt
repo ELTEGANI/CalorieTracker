@@ -102,7 +102,7 @@ fun TrackedFoodItem(
              )
               Spacer(modifier = Modifier.width(spacing.spaceSmall))
                NutrientInfo(name = stringResource(id = R.string.protein)
-                   , amount = trackedFood.protien, unit = stringResource(id = R.string.grams),
+                   , amount = trackedFood.protein, unit = stringResource(id = R.string.grams),
                    amountTextSize = 16.sp,
                    unitTextSize = 12.sp,
                    nameTextStyle = MaterialTheme.typography.body2
