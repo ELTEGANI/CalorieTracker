@@ -6,11 +6,11 @@ import com.example.tracker_domain.model.TrackedFood
 import java.time.LocalDate
 
 
-fun TrackFoodEntity.toTrackedFood():TrackedFood{
+fun TrackFoodEntity.toTrackedFood(): TrackedFood {
     return TrackedFood(
         name = name,
         carbs = carbs,
-        protien = protein,
+        protein = protein,
         fat = fat,
         imageUrl = imageUrl,
         mealType = MealType.fromString(type),
@@ -21,18 +21,18 @@ fun TrackFoodEntity.toTrackedFood():TrackedFood{
     )
 }
 
-fun TrackedFood.toTrackFoodEntity():TrackFoodEntity{
+fun TrackedFood.toTrackedFoodEntity(): TrackFoodEntity {
     return TrackFoodEntity(
         name = name,
         carbs = carbs,
-        protein = protien,
+        protein = protein,
         fat = fat,
         imageUrl = imageUrl,
         type = mealType.name,
         amount = amount,
-        dayOfMonth = date.monthValue,
+        dayOfMonth = date.dayOfMonth,
         month = date.monthValue,
-        year =date.dayOfYear,
+        year = date.year,
         calories = calories,
         id = id
     )

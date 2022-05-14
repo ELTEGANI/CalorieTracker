@@ -2,9 +2,9 @@ package com.example.tracker_data.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.tracker_data.local.entity.TrackerDataBase
+import com.example.tracker_data.local.entity.TrackerDatabase
 import com.example.tracker_data.remote.OpenFoodApi
-import com.example.tracker_data.repository.TrackerRepositoryIm
+import com.example.tracker_data.repository.TrackerRepositoryImpl
 import com.example.tracker_domain.repository.TrackerRepository
 import dagger.Module
 import dagger.Provides
@@ -21,44 +21,49 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object TrackerDataModule {
+
     @Provides
     @Singleton
-    fun provideOkHttpClient():OkHttpClient{
+    fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor (
+            .addInterceptor(
                 HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
                 }
-            ).build()
+            )
+            .build()
     }
 
     @Provides
     @Singleton
-    fun provideOpenFoodApi(okHttpClient: OkHttpClient):OpenFoodApi{
+    fun provideOpenFoodApi(client: OkHttpClient): OpenFoodApi {
         return Retrofit.Builder()
             .baseUrl(OpenFoodApi.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
-            .client(okHttpClient)
+            .client(client)
             .build()
             .create()
     }
 
     @Provides
     @Singleton
-    fun provideTrackerDataBase(application: Application):TrackerDataBase{
+    fun provideTrackerDatabase(app: Application): TrackerDatabase {
         return Room.databaseBuilder(
-            application,
-            TrackerDataBase::class.java,
+            app,
+            TrackerDatabase::class.java,
             "tracker_db"
         ).build()
     }
 
     @Provides
     @Singleton
-    fun provideTrackerRepository(openFoodApi: OpenFoodApi,trackerDataBase: TrackerDataBase):TrackerRepository{
-       return TrackerRepositoryIm(
-           trackerDao = trackerDataBase.trackerDao,
-           openFoodApi = openFoodApi
-       )
+    fun provideTrackerRepository(
+        api: OpenFoodApi,
+        db: TrackerDatabase
+    ): TrackerRepository {
+        return TrackerRepositoryImpl(
+            dao = db.dao,
+            api = api
+        )
     }
 }

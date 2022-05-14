@@ -19,19 +19,21 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideSharedPreferences(application: Application):SharedPreferences{
-        return application.getSharedPreferences("shared_pref",MODE_PRIVATE)
+    fun provideSharedPreferences(
+        app: Application
+    ): SharedPreferences {
+        return app.getSharedPreferences("shared_pref", MODE_PRIVATE)
     }
 
     @Provides
     @Singleton
-    fun providePreferences(sharedPreferences: SharedPreferences):Preferences{
+    fun providePreferences(sharedPreferences: SharedPreferences): Preferences {
         return DefaultPreferences(sharedPreferences)
     }
 
     @Provides
     @Singleton
-    fun provideFilterOutDigitsUseCase():FilterOutDigits{
+    fun provideFilterOutDigitsUseCase(): FilterOutDigits {
         return FilterOutDigits()
     }
 }

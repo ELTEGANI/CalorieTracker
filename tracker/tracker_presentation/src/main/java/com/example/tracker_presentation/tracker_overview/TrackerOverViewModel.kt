@@ -16,36 +16,37 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.nio.file.Files.copy
 import javax.inject.Inject
 
 
 @HiltViewModel
-class TrackerOverViewModel @Inject constructor(
+class TrackerOverviewViewModel @Inject constructor(
     preferences: Preferences,
-    private val trackerUseCases:TrackerUseCases
-):ViewModel(){
+    private val trackerUseCases: TrackerUseCases,
+): ViewModel() {
+
+    var state by mutableStateOf(TrackerOverViewState())
+        private set
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
     private var getFoodsForDateJob: Job? = null
 
-    var state by mutableStateOf(TrackerOverViewState())
-    private set
-
     init {
-       preferences.saveShouldShowOnBoarding(false)
+        refreshFoods()
+        preferences.saveShouldShowOnboarding(false)
     }
 
-
-    fun onEvent(trackerOverViewEvent: TrackerOverViewEvent){
-        when(trackerOverViewEvent){
-            is TrackerOverViewEvent.OnAddFoodClick ->{
+    fun onEvent(event: TrackerOverViewEvent) {
+        when(event) {
+            is TrackerOverViewEvent.OnAddFoodClick -> {
                 viewModelScope.launch {
                     _uiEvent.send(
                         UiEvent.Navigate(
                             route = Route.SEARCH
-                                    + "/${trackerOverViewEvent.meal.mealType.name}"
+                                    + "/${event.meal.mealType.name}"
                                     + "/${state.date.dayOfMonth}"
                                     + "/${state.date.monthValue}"
                                     + "/${state.date.year}"
@@ -53,28 +54,28 @@ class TrackerOverViewModel @Inject constructor(
                     )
                 }
             }
-            is TrackerOverViewEvent.OnDeleteTrackedFoodClick->{
-                  viewModelScope.launch {
-                      trackerUseCases.deleteTrackedFood(trackerOverViewEvent.trackedFood)
-                      refreshFoods()
-                  }
+            is TrackerOverViewEvent.OnDeleteTrackedFoodClick -> {
+                viewModelScope.launch {
+                    trackerUseCases.deleteTrackedFood(event.trackedFood)
+                    refreshFoods()
+                }
             }
-            is TrackerOverViewEvent.OnNextDayClick ->{
-                 state = state.copy(
-                     date = state.date.plusDays(1)
-                 )
+            is TrackerOverViewEvent.OnNextDayClick -> {
+                state = state.copy(
+                    date = state.date.plusDays(1)
+                )
                 refreshFoods()
             }
-            is TrackerOverViewEvent.OnPreviousDayClick ->{
+            is TrackerOverViewEvent.OnPreviousDayClick -> {
                 state = state.copy(
                     date = state.date.minusDays(1)
                 )
                 refreshFoods()
             }
-            is TrackerOverViewEvent.OnToggleMealClick ->{
+            is TrackerOverViewEvent.OnToggleMealClick -> {
                 state = state.copy(
                     meals = state.meals.map {
-                        if(it.name == trackerOverViewEvent.meal.name){
+                        if(it.name == event.meal.name) {
                             it.copy(isExpand = !it.isExpand)
                         } else it
                     }
@@ -83,33 +84,40 @@ class TrackerOverViewModel @Inject constructor(
         }
     }
 
-    private fun refreshFoods(){
+    private fun refreshFoods() {
         getFoodsForDateJob?.cancel()
-        getFoodsForDateJob = trackerUseCases.getsFoodForDate(state.date)
-            .onEach {foods->
-                val nutrients = trackerUseCases.calculateMealNutrients(foods)
-                state  = state.copy(
-                 totalCarbs = nutrients.totalCarbs,
-                 totalProtIntin = nutrients.totalProtien,
-                 totalFat = nutrients.totalFat,
-                 totalCalories = nutrients.totalCalories,
-                 carbsGoal = nutrients.carbsGoal,
-                 protinGoal = nutrients.protienGoal,
-                 fatGoal = nutrients.fatGoal,
-                 caloriesGoal = nutrients.caloriesGoal,
-                 trackedFoods = foods,
-                 meals = state.meals.map {
-                     val nutrientsForMeals = nutrients.mealNutrients[it.mealType]
-                         ?: return@map it.copy(carbs = 0, protien = 0, fat = 0, calories = 0
-                         )
-                     it.copy(
-                         carbs = nutrientsForMeals.carbs,
-                         protien = nutrientsForMeals.protien,
-                         fat = nutrientsForMeals.fat,
-                         calories = nutrientsForMeals.calories
-                     )
-                 }
+        getFoodsForDateJob = trackerUseCases
+            .getsFoodForDate(state.date)
+            .onEach { foods ->
+                val nutrientsResult = trackerUseCases.calculateMealNutrients(foods)
+                state = state.copy(
+                    totalCarbs = nutrientsResult.totalCarbs,
+                    totalProtIntin = nutrientsResult.totalProtein,
+                    totalFat = nutrientsResult.totalFat,
+                    totalCalories = nutrientsResult.totalCalories,
+                    carbsGoal = nutrientsResult.carbsGoal,
+                    protinGoal = nutrientsResult.proteinGoal,
+                    fatGoal = nutrientsResult.fatGoal,
+                    caloriesGoal = nutrientsResult.caloriesGoal,
+                    trackedFoods = foods,
+                    meals = state.meals.map {
+                        val nutrientsForMeal =
+                            nutrientsResult.mealNutrients[it.mealType]
+                                ?: return@map it.copy(
+                                    carbs = 0,
+                                    protien = 0,
+                                    fat = 0,
+                                    calories = 0
+                                )
+                        it.copy(
+                            carbs = nutrientsForMeal.carbs,
+                            protien = nutrientsForMeal.protein,
+                            fat = nutrientsForMeal.fat,
+                            calories = nutrientsForMeal.calories
+                        )
+                    }
                 )
-            }.launchIn(viewModelScope)
+            }
+            .launchIn(viewModelScope)
     }
 }

@@ -1,5 +1,7 @@
 package com.example.tracker_domain.use_case
 
+
+
 import com.example.core.domain.model.ActivityLevel
 import com.example.core.domain.model.Gender
 import com.example.core.domain.model.GoalType
@@ -9,29 +11,28 @@ import com.example.tracker_domain.model.MealType
 import com.example.tracker_domain.model.TrackedFood
 import kotlin.math.roundToInt
 
-
 class CalculateMealNutrients(
     private val preferences: Preferences
 ) {
 
-    operator fun invoke(trackedFood:List<TrackedFood>):Result{
-        val allNutrients = trackedFood
+    operator fun invoke(trackedFoods: List<TrackedFood>): Result {
+        val allNutrients = trackedFoods
             .groupBy { it.mealType }
-            .mapValues { entry->
-               val type = entry.key
-               val foods = entry.value
-               MealNutrients(
-                   carbs = foods.sumOf { it.carbs },
-                   protien = foods.sumOf { it.protien },
-                   fat = foods.sumOf { it.fat },
-                   calories = foods.sumOf { it.calories },
-                   mealType = type
-               )
+            .mapValues { entry ->
+                val type = entry.key
+                val foods = entry.value
+                MealNutrients(
+                    carbs = foods.sumOf { it.carbs },
+                    protein = foods.sumOf { it.protein },
+                    fat = foods.sumOf { it.fat },
+                    calories = foods.sumOf { it.calories },
+                    mealType = type
+                )
             }
         val totalCarbs = allNutrients.values.sumOf { it.carbs }
-        val totalProtien = allNutrients.values.sumOf { it.protien }
+        val totalProtein = allNutrients.values.sumOf { it.protein }
         val totalFat = allNutrients.values.sumOf { it.fat }
-        val totalCalaries= allNutrients.values.sumOf { it.calories }
+        val totalCalories = allNutrients.values.sumOf { it.calories }
 
         val userInfo = preferences.loadUserInfo()
         val caloryGoal = dailyCaloryRequirement(userInfo)
@@ -41,13 +42,13 @@ class CalculateMealNutrients(
 
         return Result(
             carbsGoal = carbsGoal,
-            protienGoal = proteinGoal,
+            proteinGoal = proteinGoal,
             fatGoal = fatGoal,
             caloriesGoal = caloryGoal,
             totalCarbs = totalCarbs,
-            totalProtien = totalProtien,
+            totalProtein = totalProtein,
             totalFat = totalFat,
-            totalCalories = totalCalaries,
+            totalCalories = totalCalories,
             mealNutrients = allNutrients
         )
     }
@@ -78,24 +79,24 @@ class CalculateMealNutrients(
         }
         return (bmr(userInfo) * activityFactor + caloryExtra).roundToInt()
     }
+
     data class MealNutrients(
-        val carbs:Int,
-        val protien :Int,
-        val fat:Int,
-        val calories:Int,
-        val mealType:MealType
+        val carbs: Int,
+        val protein: Int,
+        val fat: Int,
+        val calories: Int,
+        val mealType: MealType
     )
 
     data class Result(
-        val carbsGoal:Int,
-        val protienGoal:Int,
-        val fatGoal:Int,
-        val caloriesGoal:Int,
-        val totalCarbs:Int,
-        val totalProtien:Int,
-        val totalFat:Int,
-        val totalCalories:Int,
-        val mealNutrients: Map<MealType,MealNutrients>)
-
-
+        val carbsGoal: Int,
+        val proteinGoal: Int,
+        val fatGoal: Int,
+        val caloriesGoal: Int,
+        val totalCarbs: Int,
+        val totalProtein: Int,
+        val totalFat: Int,
+        val totalCalories: Int,
+        val mealNutrients: Map<MealType, MealNutrients>
+    )
 }
