@@ -49,7 +49,7 @@ fun NutrientHeader(
            horizontalArrangement = Arrangement.SpaceBetween
        ) {
          UnitDisplay(
-             amount = animatedCaloriesCount.value,
+             amount = trackerOverViewState.caloriesGoal,
              unit = stringResource(id = R.string.kcal),
              amountColor = MaterialTheme.colors.onPrimary,
              amountTextSize = 40.sp,
