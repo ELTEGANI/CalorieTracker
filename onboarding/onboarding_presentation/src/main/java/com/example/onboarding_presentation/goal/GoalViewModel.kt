@@ -5,11 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.domain.model.ActivityLevel
-import com.example.core.domain.model.Gender
 import com.example.core.domain.model.GoalType
 import com.example.core.domain.preference.Preferences
-import com.example.core.navigation.Route
 import com.example.core.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -35,7 +32,7 @@ class GoalViewModel @Inject constructor(
    fun onNextClick(){
       viewModelScope.launch {
           preferences.saveGoalType(selectedGoal)
-          _uiEvent.send(UiEvent.Navigate(Route.NUTRIENT_GOAL))
+          _uiEvent.send(UiEvent.Success)
       }
    }
 

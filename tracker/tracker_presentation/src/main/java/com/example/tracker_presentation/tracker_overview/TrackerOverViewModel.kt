@@ -1,12 +1,12 @@
 package com.example.tracker_presentation.tracker_overview
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.domain.preference.Preferences
-import com.example.core.navigation.Route
 import com.example.core.util.UiEvent
 import com.example.tracker_domain.use_case.TrackerUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import java.nio.file.Files.copy
 import javax.inject.Inject
 
 
@@ -39,21 +38,9 @@ class TrackerOverviewViewModel @Inject constructor(
         preferences.saveShouldShowOnboarding(false)
     }
 
+    @SuppressLint("NewApi")
     fun onEvent(event: TrackerOverViewEvent) {
         when(event) {
-            is TrackerOverViewEvent.OnAddFoodClick -> {
-                viewModelScope.launch {
-                    _uiEvent.send(
-                        UiEvent.Navigate(
-                            route = Route.SEARCH
-                                    + "/${event.meal.mealType.name}"
-                                    + "/${state.date.dayOfMonth}"
-                                    + "/${state.date.monthValue}"
-                                    + "/${state.date.year}"
-                        )
-                    )
-                }
-            }
             is TrackerOverViewEvent.OnDeleteTrackedFoodClick -> {
                 viewModelScope.launch {
                     trackerUseCases.deleteTrackedFood(event.trackedFood)

@@ -1,5 +1,6 @@
 package com.example.tracker_data.repository
 
+import android.annotation.SuppressLint
 import com.example.tracker_data.local.TrackerDao
 import com.example.tracker_data.mappers.toTrackableFood
 import com.example.tracker_data.mappers.toTrackedFood
@@ -31,7 +32,17 @@ class TrackerRepositoryImpl(
                 pageSize = pageSize
             )
             Result.success(
-                searchDto.products.mapNotNull { it.toTrackableFood() }
+
+                searchDto.products
+                    .filter {
+                        val calculateCalories = it.nutriments.carbohydrates100g * 4f +
+                                it.nutriments.proteins100g * 4f +
+                                it.nutriments.fat100g * 9f
+                        val lowerBound = calculateCalories * 0.99f
+                        val upperBound = calculateCalories * 1.01f
+                        it.nutriments.carbohydrates100g in (lowerBound..upperBound)
+                    }
+                    .mapNotNull { it.toTrackableFood() }
             )
         } catch(e: Exception) {
             e.printStackTrace()
@@ -47,6 +58,7 @@ class TrackerRepositoryImpl(
         dao.deleteTrackedFood(food.toTrackedFoodEntity())
     }
 
+    @SuppressLint("NewApi")
     override fun getFoodsForDate(localDate: LocalDate): Flow<List<TrackedFood>> {
         return dao.getFoodsForDate(
             day = localDate.dayOfMonth,
