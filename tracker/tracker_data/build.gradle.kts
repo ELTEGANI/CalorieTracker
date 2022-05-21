@@ -10,6 +10,7 @@ dependencies {
     "implementation"(Retrofit.retrofit)
     "implementation"(Retrofit.okHttpLoggingInterceptor)
     "implementation"(Retrofit.moshiConverter)
+    "implementation"("junit:junit:4.13.2")
 
     "kapt"(Room.roomCompiler)
     "implementation"(Room.roomKtx)
