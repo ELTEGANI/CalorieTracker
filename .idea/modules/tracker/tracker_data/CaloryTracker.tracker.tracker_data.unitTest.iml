@@ -65,8 +65,12 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../../tracker/tracker_data/build/generated/ap_generated_sources/debugUnitTest/out" />
-    <content url="file://$MODULE_DIR$/../../../../tracker/tracker_data/build/generated/source/kapt/debugUnitTest" />
-    <content url="file://$MODULE_DIR$/../../../../tracker/tracker_data/build/generated/source/kaptKotlin/debugUnitTest" />
+    <content url="file://$MODULE_DIR$/../../../../tracker/tracker_data/build/generated/source/kapt/debugUnitTest">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../tracker/tracker_data/build/generated/source/kapt/debugUnitTest" isTestSource="true" generated="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../tracker/tracker_data/build/generated/source/kaptKotlin/debugUnitTest">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../tracker/tracker_data/build/generated/source/kaptKotlin/debugUnitTest" isTestSource="true" generated="true" />
+    </content>
     <content url="file://$MODULE_DIR$/../../../../tracker/tracker_data/src/test">
       <sourceFolder url="file://$MODULE_DIR$/../../../../tracker/tracker_data/src/test/java" isTestSource="true" />
     </content>
@@ -154,4 +158,5 @@
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation-experimental:1.1.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.dagger:dagger-lint-aar:2.40@aar" level="project" />
   </component>
+  <component name="TestModuleProperties" production-module="CaloryTracker.tracker.tracker_data.main" />
 </module>

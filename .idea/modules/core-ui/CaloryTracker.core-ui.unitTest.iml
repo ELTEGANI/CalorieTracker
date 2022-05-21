@@ -166,4 +166,5 @@
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation-experimental:1.1.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.dagger:dagger-lint-aar:2.40@aar" level="project" />
   </component>
+  <component name="TestModuleProperties" production-module="CaloryTracker.core-ui.main" />
 </module>

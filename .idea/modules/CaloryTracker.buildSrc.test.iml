@@ -296,4 +296,5 @@
       </library>
     </orderEntry>
   </component>
+  <component name="TestModuleProperties" production-module="CaloryTracker.buildSrc.main" />
 </module>
