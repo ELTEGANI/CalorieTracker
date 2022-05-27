@@ -24,7 +24,7 @@ import com.example.tracker_domain.model.TrackableFood
 import com.example.tracker_domain.use_case.*
 import com.example.tracker_presentation.search.SearchScreen
 import com.example.tracker_presentation.search.SearchViewModel
-import com.example.tracker_presentation.tracker_overview.TrackerOverViewScreen
+import com.example.tracker_presentation.tracker_overview.TrackerOverviewScreen
 import com.example.tracker_presentation.tracker_overview.TrackerOverviewViewModel
 import com.google.common.truth.Truth.assertThat
 import com.plcoding.calorytracker.navigation.Route
@@ -100,7 +100,7 @@ class TrackerOverViewE2E {
                          startDestination =Route.TRACKER_OVERVIEW
                      ){
                          composable(Route.TRACKER_OVERVIEW){
-                             TrackerOverViewScreen(
+                             TrackerOverviewScreen(
                                  onNavigateToSearch = {mealName,day,month,year->
                                      navController.navigate(
                                          Route.SEARCH +
